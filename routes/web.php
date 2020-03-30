@@ -17,9 +17,8 @@ Route::get('/', function () {
     return view('index');
 })->name('home');
 
-Route::get('/login', function() {
-	return view('login');
-})->name('login');	
+Route::get('/login', 'Backend\loginController@show')->name('login');
+Route::post('/login', 'Backend\loginController@login')->name('admin');
 
 Route::get('/register', function() {
 	return view('register');

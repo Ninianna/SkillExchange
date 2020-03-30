@@ -94,12 +94,13 @@
     	style = " display: block;
     	max-width: 50%;
     	margin: auto;
-    	margin-bottom: 10px;"/>
+		margin-bottom: 10px;"/>
+		<form>
     	<input type="text" class="Input" placeholder="電子信箱" name="email">
     	<input type="password" class="Input" placeholder="密碼" name="password">
-
+		</form>
     	<div class="option">
-    		<div class="OptionButton" id="sure">登入</div>
+    		<div class="OptionButton" id="sure" 'method'=['post'] onclick="location.href='{{route('admin')}}';">登入</div>
     		<div class="OptionButton" id="forget">忘記密碼</div>
     		<div class="OptionButton" id="register" onclick="location.href='{{route('register')}}';">註冊</div>
     		<div class="OptionButton" id="close" onclick="location.href='{{route('home')}}';">關閉</div>

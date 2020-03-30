@@ -83,8 +83,8 @@
 
     	<div class="loginHolder">
 
-    			<div class="Button" id ="login" onclick="location.href='{{route('login')}}';">登入</div>
-    			<div class="Button" id="Register" onclick="location.href='{{route('register')}}';">註冊</div>
+    			<div class="Button" id ="center" onclick="location.href='{{route('login')}}';">會員中心</div>
+    			<div class="Button" id="TAregister" onclick="location.href='{{route('register')}}';">教學註冊</div>
     			<div class="Button" id="Contact" onclick="location.href='{{route('contact')}}';">聯絡我們</div>
     		
     	</div>
