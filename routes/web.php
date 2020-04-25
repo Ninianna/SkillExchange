@@ -20,10 +20,26 @@ Route::get('/', function () {
 Route::get('/login', 'Backend\loginController@show')->name('login');
 Route::post('/login', 'Backend\loginController@login')->name('admin');
 
+Route::group(['middleware' => ['auth']], function () {
+	Route::get('login_home',function(){
+		return view('login_home');
+	})->name('login_home');
+	Route::get('apply', function(){
+		return view('apply');
+	})->name('apply');
+});
+Route::post('login_home', 'Backend\loginController@logout')->name('logout');
+
 Route::get('/register', function() {
 	return view('register');
 })->name('register');
 
+Route::post('/register', 'Backend\loginController@register')->name('registration');
+
 Route::get('/contact', function() {
 	return view('contact');
 })->name('contact');
+
+Route::get('/apply', function(){
+	return view('apply');
+})->name('apply');

@@ -25,7 +25,8 @@
 		    box-shadow: -2px 2px 2px 1px #F0F000;
 		    font-size: 100%;
 		    cursor: pointer;
-		    font-weight: bold;
+			font-weight: bold;
+			font-family: "微軟正黑體";
 		}
 		.Button:active{
 			padding: 10px 20px;
@@ -82,11 +83,13 @@
 		<img src="../static/title1.png" class="HeaderImage" onclick="location.href='{{route('home')}}';"/>
 
     	<div class="loginHolder">
-
-    			<div class="Button" id ="center" onclick="location.href='{{route('login')}}';">會員中心</div>
-    			<div class="Button" id="TAregister" onclick="location.href='{{route('register')}}';">教學註冊</div>
-    			<div class="Button" id="Contact" onclick="location.href='{{route('contact')}}';">聯絡我們</div>
-    		
+			<form action="login_home" method="POST">
+				@csrf
+				<div class="Button" id ="center" onclick="location.href='{{route('login')}}';">會員中心</div>
+				<div class="Button" id="TAregister" onclick="location.href='{{route('apply')}}';">教學註冊</div>
+				<div class="Button" id="Contact" onclick="location.href='{{route('contact')}}';">聯絡我們</div>
+				<input type="submit" class="Button" id="Logout" onclick="location.href='{{route('logout')}}';" value="登出">
+			</form>
     	</div>
 
 	</div>
