@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>SELogin</title>
+	<title>SEContact</title>
 	<style>
 		@keyframes slideUp{
 			from{
@@ -14,7 +14,7 @@
 				top: 50%;
 			}
 		}
-		.ApplyPage{
+		.MatchPage{
 			background-color:white;
 			max-width:400px;
 			position: fixed;
@@ -44,6 +44,24 @@
     		width: 80%;
 			box-sizing: border-box;
 			text-align: left;
+		}
+
+		.Context{
+			margin-top: 5px;
+    		padding-top: 5px;
+    		padding-bottom: 70px;
+    		padding-left: 10px;
+    		font-size: 90%;
+    		background-color: white;
+    		border-radius: 5px;
+    		border-style: solid;
+    		border-color: #D9D9D9;
+    		border-width: 1px;
+    		width: 80%;
+			box-sizing: border-box;
+			text-align: left;
+			font-size: 90%;
+			font-family: '微軟正黑體';
 		}
 
 		.option{
@@ -81,21 +99,7 @@
 		    font-size: 100%;
 		    cursor: pointer;
 		}
-        .Experience{
-			margin-top: 5px;
-    		padding-top: 5px;
-    		padding-bottom: 50px;
-    		padding-left: 10px;
-    		font-size: 90%;
-    		background-color: white;
-    		border-radius: 5px;
-    		border-style: solid;
-    		border-color: #D9D9D9;
-    		border-width: 1px;
-    		width: 80%;
-			box-sizing: border-box;
-			text-align: left;
-		}
+
 		input{
 			border:none;
 			font-family: '微軟正黑體';
@@ -107,24 +111,20 @@
 
 <body style="background-color:#FFFFB5;margin:0;font-family: '微軟正黑體'";>
 
-	<div class = "ApplyPage">
-		<img src = "../static/apply.png";
+	<div class = "MatchPage">
+		<img src = "../static/match.png";
     	style = " display: block;
-    	max-width: 50%;
+    	max-width: 60%;
     	margin: auto;
 			margin-bottom: 10px;"/>
-			<form method="POST" action={{route('applying')}} enctype="multipart/form-data">
+			<form method="post" action={{route('match_store')}} enctype="multipart/form-data">
 				@csrf
-    		<input type="text" class="Input" placeholder="最高學歷學校名稱" name="highestEducation">
-    		<input type="text" class="Input" placeholder="科系(所)" name="department">
-				<input type="text" class="Experience" placeholder="相關教學經驗(請上傳相關證照或教學檔案)" name="experience">
-        <input type="file" name="file" value="選擇檔案">
-						{{-- <input type="submit" name="submit" value="上傳檔案"> --}}
-				<div class="option">
-					<input type="submit" class="OptionButton" id="apply" value="提出申請">
-					<div class="OptionButton" id="close" onclick="window.history.back()">關閉</div>
-				</div>
-		</form>
+    		<input type="text" class="Input" placeholder="想要交換的技能" name="want_to_exchange" value={{$matches->want_to_exchange}}>
+    		<input type="text" class="Input" placeholder="可以交換的技能" name="able_to_exchange" value={{$matches->able_to_exchange}}>
+    		<textarea class="Context" placeholder="簡短的自我介紹" name="self_introduction">{{$matches->self_introduction}}</textarea>
+    		<input type="submit" class="OptionButton" id="send" value="送出">
+				<div class="OptionButton" id="cancel"  onclick="window.history.back()">取消</div>
+			</form>
 
 	</div>
 

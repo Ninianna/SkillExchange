@@ -118,7 +118,7 @@
   		font-size:20px;
 			width:96%;
 		}
-		th {
+		th{
   		background-color:#FFF0D4;
 		}
 		td {
@@ -143,18 +143,16 @@
 		<img src="../static/title1.png" class="HeaderImage" onclick="location.href='{{route('home')}}';"/>
 
     	<div class="loginHolder">
-			<form action="{{route('logout')}}" method="POST">
+			<form action="login_home" method="POST">
 				@csrf
-				<div class="Button" id ="center" onclick="location.href='{{route('center')}}';">會員中心</div>
-				<div class="Button" id="TAregister" onclick="location.href='{{route('applyFor')}}';">教學註冊</div>
-				<div class="Button" id="Contact" onclick="location.href='{{route('contact')}}';">聯絡我們</div>
-				<input type="submit" class="Button" id="Logout" value="登出">
+				<div class="Button" id ="center" onclick="location.href='{{route('applyFor')}}';">教學註冊</div>
+				<div class="Button" id="contact" onclick="location.href='{{route('contact')}}';">聯絡我們</div>
+				<div class="Button" id="return" onclick="location.href='{{route('login_home')}}';">返回首頁</div>
+				<input type="submit" class="Button" id="Logout" onclick="location.href='{{route('logout')}}';" value="登出">
 			</form>
-			</div>
-			<div style="margin-right: 50px;margin-top:30px;float:right">{{$user->name}}，歡迎回來！</div>
+    	</div>
 
 	</div>
-
 
 	<div>
 		<div id="Search">
@@ -163,37 +161,60 @@
 	</div>
 
 	<div id="article" class="ArticleView">
-		<div class="AddButton" id="article" onclick="location.href='{{route('add')}}';">+發佈貼文</div>
-		<div style="color: #FFFFF2;">ABCD</div>
-
-		@if (isset($articles))
+	<div style="color: #000000; margin-left: 40px;padding-top:10px;font-size:40px">歷史文章記錄</div>
 			<ol>
 				<table>
 					<tr>
 						<th>標題</th>
 						<th>內容摘要</th>
-						<th>發布者</th>
+						<th>執行</th>
 					</tr>
 
 					@foreach ($articles as $article)
 					<tr>
 						<td>{{$article->title}}</td>
 						<td>{{$article->content}}</td>
-						@if ($article->user->teaching_verified == true)
-								<td style="color:#FF8282;">
-									{{$article->user->name}}
-								</td>
-							@else
-								<td>
-									{{$article->user->name}}
-								</td>
-							@endif
+						<td>
+							<form method="post" action={{route('article_delete')}}>
+								@csrf
+								<input type="hidden" id="article_id" name="article_id" value="{{$article->id}}">
+								<input type="hidden" id="del" name="delete" value="刪除">
+								<input type="submit" class="Button" style="font-size:12px;" id="Contact" value="刪除" onClick="return confirm('請確認是否刪除?')"/>
+							</form>
+							<form method="post" action={{route('article_delete')}}>
+								@csrf
+								<input type="hidden" id="article_id" name="article_id" value="{{$article->id}}">
+								<input type="hidden" id="article_id" name="delete" value="編輯">
+								<input type=submit class="Button" style="font-size:12px;" id="Contact" value="編輯">
+							</form>
+						</td>
 					</tr>
 					@endforeach
 				</table>
-
 			</ol>
-		@endif
-	</div>
+  </div>
+  <div id="article" class="ArticleView">
+		<div style="color: #000000; margin-left: 40px;padding-top:10px;font-size:40px">配對紀錄</div>
+		<div class="AddButton" style="margin-left: 40px;" id="article" onclick="location.href='{{route('match')}}';">填寫基本配對資料</div>
+		<p style="margin-left: 40px; font-size:15px">*提醒* 需要填寫基本資料系統才能夠幫您配對喔！</p>
+    <ol>
+      <table>
+				<tr>
+					<th>配對者</th>
+					<th>可交換技能</th>
+					<th>欲交換技能</th>
+					<th>簡短自我介紹</th>
+					<th>執行</th>
+				</tr>
+					<td>{{$matches->user_name}}</td>
+					<td>{{$matches->able_to_exchange}}</td>
+					<td>{{$matches->want_to_exchange}}</td>
+					<td>{{$matches->self_introduction}}</td>
+					<td>
+						<div class="Button" style="font-size:13px;" id="Contact">發送邀請</div>
+					</td>
+			</table>
+    </ol>
+  </div>
 </body>
 </html>

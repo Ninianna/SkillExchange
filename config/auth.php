@@ -99,6 +99,7 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'reset_url' => env('PASSSWORD_RESET_URL', 'https://laraval.local/password/resets/')
     ],
 
     /*

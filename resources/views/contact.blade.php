@@ -60,6 +60,8 @@
     		width: 80%;
 			box-sizing: border-box;
 			text-align: left;
+			font-size: 90%;
+			font-family: '微軟正黑體';
 		}
 
 		.option{
@@ -95,32 +97,35 @@
 		    background-color: #FFFFC9;
 		    box-shadow: -2px 2px 3px 1px white;
 		    font-size: 100%;
-		    cursor: pointer;			
+		    cursor: pointer;
 		}
 
-
+		input{
+			border:none;
+			font-family: '微軟正黑體';
+		}
 
 	</style>
 
 </head>
 
 <body style="background-color:#FFFFB5;margin:0;font-family: '微軟正黑體'";>
-	
+
 	<div class = "ContactPage">
 		<img src = "../static/contact.png";
     	style = " display: block;
     	max-width: 60%;
     	margin: auto;
-    	margin-bottom: 10px;"/>
-    	<input type="text" class="Input" placeholder="您的大名" name="name">
-    	<input type="text" class="Input" placeholder="電子信箱" name="email">
-    	<input type="text" class="Input" placeholder="主旨" name="topic">
-    	<input type="text" class="Context" placeholder="內文" name="context">
-
-    	<div class="option">
-    		<div class="OptionButton" id="register">送出</div>
-    		<div class="OptionButton" id="already" onclick="location.href='{{route('home')}}';">取消</div>
-    	</div>
+			margin-bottom: 10px;"/>
+			<form method="post" action={{route('send')}} enctype="multipart/form-data">
+				@csrf
+    		<input type="text" class="Input" placeholder="您的大名" name="name">
+    		<input type="text" class="Input" placeholder="電子信箱" name="email">
+    		<input type="text" class="Input" placeholder="主旨" name="topic">
+    		<textarea class="Context" placeholder="內文" name="context"></textarea>
+    		<input type="submit" class="OptionButton" id="send" value="送出">
+				<div class="OptionButton" id="cancel"  onclick="window.history.back()">取消</div>
+			</form>
 
 	</div>
 

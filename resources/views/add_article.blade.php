@@ -11,10 +11,10 @@
 			}
 			to{
 				opacity: 1;
-				top: 40%;
+				top: 45%;
 			}
 		}
-		.LoginPage{
+		.AddPage{
 			background-color:white;
 			max-width:400px;
 			position: fixed;
@@ -31,7 +31,7 @@
 		}
 
 		.Input{
-			`margin-top: 5px;
+			margin-top: 5px;
     		padding-top: 5px;
     		padding-bottom: 5px;
     		padding-left: 10px;
@@ -42,14 +42,14 @@
     		border-color: #D9D9D9;
     		border-width: 1px;
     		width: 80%;
-				box-sizing: border-box;
-				text-align: left;
+			box-sizing: border-box;
+			text-align: left;
 		}
 
 		.OptionButton{
-				padding: 10px 20px;
+			padding: 10px 20px;
     		border-radius: 2px;
-				margin-left: 10px;
+			margin-left: 10px;
     		position: relative;
     		display: inline-block;
 		    top: 0;
@@ -77,35 +77,51 @@
 			cursor: pointer;
 			font-family: '微軟正黑體';
 		}
+    .Context{
+			margin-top: 5px;
+    		padding-top: 5px;
+    		padding-bottom: 70px;
+    		padding-left: 10px;
+    		font-size: 90%;
+    		background-color: white;
+    		border-radius: 5px;
+    		border-style: solid;
+    		border-color: #D9D9D9;
+    		border-width: 1px;
+    		width: 80%;
+			box-sizing: border-box;
+			text-align: left;
+			font-size: 90%;
+			font-family: '微軟正黑體';
+		}
 
 		input{
 			border:none;
 			font-family: '微軟正黑體';
 		}
 
-</style>
+	</style>
 
 </head>
 
 <body style="background-color:#FFFFB5;margin:0;font-family: '微軟正黑體'";>
 
-	<div class = "LoginPage">
-		<img src = "../static/login.png";
+	<div class = "AddPage">
+		<img src = "../static/add.png";
     	style = " display: block;
-    	max-width: 50%;
+    	max-width: 90%;
     	margin: auto;
 		margin-bottom: 10px;"/>
-		<form method="POST" action="/login">
+		<form method="POST" action={{route('store')}}>
 			@csrf
-    		<input type="text" class="Input" placeholder="電子信箱" name="email">
-			<input type="password" class="Input" placeholder="密碼" name="password">
-			<input type="submit" class="OptionButton" id="sure" onclick="location.href='{{route('admin')}}';" value="登入">
-			<div class="OptionButton" id="forget" onclick="location.href='{{route('warning')}}';">忘記密碼</div>
-    		<div class="OptionButton" id="register" onclick="location.href='{{route('register')}}';">註冊</div>
-    		<div class="OptionButton" id="close" onclick="location.href='{{route('home')}}';">關閉</div>
+    		<input type="text" class="Input" placeholder="標題" name="title">
+				<textarea class="Context" placeholder="內容" name="context"></textarea>
+    		<input type="submit" class="OptionButton" id="upload" value="上傳">
+    		<div class="OptionButton" id="close" onclick="window.history.back()">關閉</div>
 		</form>
 
 	</div>
+
 
 </body>
 </html>

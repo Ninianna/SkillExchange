@@ -5,7 +5,7 @@
 	<title>Skill Exchange</title>
 
 	<style>
-		
+
 		.loginHolder{
 			position: absolute;
     		right: 50px;
@@ -69,15 +69,41 @@
 			text-align: left;
 			float: right;
 		}
+		.ArticleView{
+			background-color: #fffff0;
+			margin-top: 70px;
+			margin-left: 30px;
+			margin-right: 30px;
+			height: auto;
+			overflow: auto;
+		}
 
+		table {
+  		border: 0;
+  		font-family:'微軟正黑體';
+  		font-size:20px;
+			width:96%;
+			border-collpase:separate;
+		}
+		th {
+  		background-color:#FFF0D4;
+		}
+		td {
+			border-bottom:1 solid #000000;
+			text-align: center;
+		}
+		.fail {
+  		color:#FF0000;
+		}
 
 	</style>
+
 
 </head>
 
 <body style="background-color:#FFFFB5;margin:0;font-family: 'Comic Sans MS','微軟正黑體'";>
 	<div id="header" style="background-color:#FFFFF2;">
-		
+
 
 		<img src="../static/title1.png" class="HeaderImage" onclick="location.href='{{route('home')}}';"/>
 
@@ -86,7 +112,7 @@
     			<div class="Button" id ="login" onclick="location.href='{{route('login')}}';">登入</div>
     			<div class="Button" id="Register" onclick="location.href='{{route('register')}}';">註冊</div>
     			<div class="Button" id="Contact" onclick="location.href='{{route('contact')}}';">聯絡我們</div>
-    		
+
     	</div>
 
 	</div>
@@ -95,6 +121,37 @@
 		<div id="Search">
 			<input type="text" class="SearchInput" placeholder="關鍵字搜尋" name="search">
 		</div>
+	</div>
+	<div id="article" class="ArticleView">
+		<div style="color: #FFFFF2;">ABCD</div>
+
+		@if (isset($articles))
+			<ol>
+				<table>
+					<tr>
+						<th>標題</th>
+						<th>內容摘要</th>
+						<th>發布者</th>
+					</tr>
+
+					@foreach ($articles as $article)
+					<tr>
+						<td>{{$article->title}}</td>
+						<td>{{$article->content}}</td>
+							@if ($article->user->teaching_verified == true)
+								<td style="color:#FF8282;">
+									{{$article->user->name}}
+								</td>
+							@else
+								<td>
+									{{$article->user->name}}
+								</td>
+							@endif
+					</tr>
+					@endforeach
+				</table>
+			</ol>
+		@endif
 	</div>
 
 </body>

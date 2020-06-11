@@ -75,17 +75,20 @@
 		    background-color: #FFFFC9;
 		    box-shadow: -2px 2px 3px 1px white;
 		    font-size: 100%;
-		    cursor: pointer;			
+		    cursor: pointer;
 		}
 
-
+		input{
+			border:none;
+			font-family: '微軟正黑體';
+		}
 
 	</style>
 
 </head>
 
 <body style="background-color:#FFFFB5;margin:0;font-family: '微軟正黑體'";>
-	
+
 	<div class = "RegisterPage">
 		<img src = "../static/register.png";
     	style = " display: block;
@@ -100,33 +103,23 @@
 		@endif
 
 		@csrf
-		<form method="POST">
+		<form method="POST" action="/register">
     		<input type="text" class="Input" placeholder="姓名" name="name" value="{{old('name')}}">
     		<input type="text" class="Input" placeholder="電子信箱" name="email" value="{{old('email')}}">
     		<input type="password" class="Input" placeholder="密碼" name="password">
     		<select class="Input" id="edu" name="edu">
     			<option value="" disabled selected>--請選擇學歷--</option>
-    			<option value="1" {{old('edu')==1 ?'selected':''}} e_name="Master">碩博士</option>
-    			<option value="2" {{old('edu')==2 ?'selected':''}} e_name="Bachelor">大專院校</option>
-    			<option value="3" {{old('edu')==3 ?'selected':''}} e_name="HighSchool">高中職</option>
-    			<option value="4" {{old('edu')==4 ?'selected':''}} e_name="JuniorHigh">國中</option>
-    			<option value="5" {{old('edu')==5 ?'selected':''}} e_name="Elementary">國小</option>
-    			<option value="6" {{old('edu')==6 ?'selected':''}} e_name="BelowElementary">國小以下</option>
+    			<option value="Master" >碩博士</option>
+    			<option value="Bachelor">大專院校</option>
+    			<option value="HighSchool">高中職</option>
+    			<option value="JuniorHigh">國中</option>
+    			<option value="Elementary">國小</option>
+    			<option value="BelowElementary">國小以下</option>
 			</select>
-			<input type='hidden' id="education" name="education" value=""/>
 			@csrf
-			<input type="submit" class="OptionButton" id="register" onclick="location.href='{{route('registration')}}';" value="註冊">
-    		<div class="OptionButton" id="already" onclick="location.href='{{route('login')}}';">已有帳號</div>
-			<div class="OptionButton" id="close" onclick="location.href='{{route('home')}}';">關閉</div>
-			<script type="text/javascript" language="javascript">
-				$(function() {
-					$("#edu").change(function(){
-						var educ= $('option:selected', this).attr('e_name');
-						$('#education').val(educ);
-				 	});
-			  	});
-			</script>	
-
+			<input type="submit" class="OptionButton" id="register" value="註冊">
+			<div class="OptionButton" id="already" onclick="location.href='{{route('login')}}';">已有帳號</div>
+			<div class="OptionButton" id="close" onclick="window.history.back()">關閉</div>
 		</form>
 
 	</div>
